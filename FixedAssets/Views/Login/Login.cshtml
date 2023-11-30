@@ -1,0 +1,107 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Scripts/src/css/layui.css" rel="stylesheet" />
+    <link href="~/Scripts/src/css/login.css" rel="stylesheet" />
+    <title>FixedAssetsLogin</title>
+    <script>
+        if (top != window) {
+            top.location.href = top.location.href;
+        }
+    </script>
+</head>
+<body class="layui-layout-body">
+    <div class="layui-fluid" style="padding:0px" id="login">
+        <canvas id="particle" style="height:200px"></canvas>
+        <br />
+        <div class="login_l_img"><img src="~/Scripts/src/picture/login-img.png" /></div>
+        <div class="layui-form layui-form-pane layui-admin-login login_box" id="loginform">
+            @*<div class="login_logo"><a href="#"><img src="~/Scripts/src/picture/login_logo.png" /></a></div>*@
+            <div class="layui-admin-login-header">
+                <h2 style="color:#444444">固定资产管理登陆</h2>
+            </div>
+                <div style="text-align:center;">
+                    <input required lay-verify="required" name="UserName" id="username" class="login_input" type="text" placeholder="请输入账号" autocomplete="off" />
+                </div>
+                <div style="text-align:center">
+                    <input id="lay-user-pw" required lay-verify="required" name="Password" class="login_input" type="password" placeholder="请输入密码" autocomplete="off" />
+                </div>
+            <div class="layui-form-item">
+                @*<input type="checkbox" pane name="remember" title="记住密码?" lay-skin="primary" />
+                <a href="javascript:;" style="margin-top: 10px;float: right;">忘记密码</a>*@
+                <hr />
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-btn-container "style="text-align:center">
+                    <button id="lay-user-sub" class="login_btn" lay-submit lay-filter="login" style="width:342px;">
+                        <i class="layui-icon"></i>登录
+                    </button>
+                </div>
+                @*<div class="layui-btn-container">
+                    <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="register">
+                        <i class="layui-icon layui-icon-add-circle"></i>注册
+                    </button>
+                </div>*@
+            </div>
+
+        </div>
+        <div class="copyright">苏州@东泰精密模具公司</div>
+    </div>
+    <script src="~/Scripts/src/layui.js"></script>
+    <script>
+        layui.use(['layer', 'form'], function () {
+            var layer = layui.layer, form = layui.form, $ = layui.jquery;
+            //$('#loginform').hide();
+            //$('#login').append('<p>系统维护：<br/> 2023/03/13 09:00~12:00</p>').css({ "text-align":"center","font-size":"80px" });
+
+            form.on("submit(login)", function (obj) {
+                var user = obj.field;
+                //loading动画
+                layer.load(3);
+                $.ajax({
+                    type: "POST",
+                    url: "/Login/Sign",
+                    data: user,
+                    success: function (result) {
+                        if (result.Success == true) {
+                            layer.msg(result.Massage, { icon: 1 })
+                            window.location.href = "/Home/Index"
+                        }
+                        else {
+                            layer.msg(result.Massage, { icon: 5 })
+                        }
+                        //关闭loading动画
+                        layer.closeAll("loading");
+                    }
+                })
+            })
+            //user
+            $('#username').keydown(function (e) {
+                if (e.keyCode === 13 || e.keyCode ===108) {
+                    $('#lay-user-pw').focus();
+                }
+            })
+
+            $("#lay-user-pw").keydown(function (e) {
+                if (e.keyCode === 13 || e.keyCode === 108) {
+                    $("#lay-user-sub").trigger("click")
+                }
+            })
+        })
+    </script>
+    <script>
+        //用户名输入框 获取焦点
+        window.onload = function () {
+            layui.jquery("#username").focus();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+
+html {
+    height: 100%;
+}
+
+body {
+    /* background-image: url('../../../Image/cover3.jpg');*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #93defe;
+}
+
+.layui-admin-login-header {
+    padding: 20px;
+    text-align: center;
+}
+
+    .layui-admin-login-header h2 {
+        color: #27A9E3;
+        font-family: "Helvetica Neue, Helvetica, PingFang SC, ºÚÌå, Tahoma, Arial, sans-serif";
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+.layui-admin-login {
+    width: 380px;
+    margin: 0 auto;
+    border-radius: 5px;
+    padding: 2%;
+    background-color: #ffffff
+}
+
+    .layui-admin-login .layui-footer {
+        color: white;
+        text-align: center
+    }
+
+    .layui-admin-login .layui-form-checkbox {
+        margin-left: 0px;
+    }
+.login_input {
+
+    border: 1px solid #DCDEE0;
+    vertical-align: middle;
+    border-radius: 3px;
+    height: 47px;
+    padding: 0px 30px;
+    font-size: 14px;
+    color: #888;
+    outline: none;
+    width: 280px;
+    margin-bottom: 15px;
+    display: block;
+    line-height: 50px;
+}
+.login_btn {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 12px 24px;
+    margin: 0px;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #27A9E3;
+    border-radius: 3px;
+    border: none;
+    -webkit-appearance: none;
+    outline: none;
+}
+.copyright {
+    font-size: 14px;
+    color: #fff;
+    display: block;
+    width: 100%;
+    float: left;
+    text-align: center;
+    margin-top: 60px;
+}
+.login_box {
+    float: left;
+    display: inline;
+    width: 340px;
+    height: 300px;
+    margin-left: 180px;
+}
+.login_l_img {
+    float: left;
+    display: inline;
+    width: 432px;
+    height: 440px;
+    margin-left: 430px;
+}

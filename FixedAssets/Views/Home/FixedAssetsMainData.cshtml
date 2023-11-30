@@ -1,0 +1,577 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="~/Scripts/src/css/layui.css" rel="stylesheet" />
+    <script src="~/Scripts/src/layui.js"></script>
+</head>
+<body>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;" id="link1">
+        <legend>固定资产状态(当前工厂)：</legend>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:10%">正常使用台数：</label>
+            <div class="layui-input-inline" style="margin-left: 10px; width: 18%; margin-top: 10px;font-size:larger">
+                @*<b id="ComputerStatus1">@ViewBag.ComputerStatus1</b>*@
+                <b id="ComputerStatus1"></b>
+            </div>
+
+            <label class="layui-form-label" style="width:10%">等待报废台数：</label>
+            <div class="layui-input-inline" style="margin-left: 10px; width: 18%; margin-top: 10px; font-size: larger ">
+                <b id="ComputerStatus2"></b>
+            </div>
+
+            <label class="layui-form-label" style="width:10%">已经报废台数：</label>
+            <div class="layui-input-inline" style="margin-left: 10px; width: 18%; margin-top: 10px; font-size: larger;">
+                <b id="ComputerStatus3"></b>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    </fieldset>
+    <div class="layui-form" lay-filter="UserInfoForm">
+        <div style="padding:0px 15px 0px 5px;text-align:right">
+            <div class="layui-input-inline" style="padding:0px 5px 0px 0px">
+                @* <input type="text" id="plants" name="plants" class="layui-input" placeholder="工厂" lay-filter="plants" />*@
+                <select name="plants" id="plants" class="layui-input" lay-filter="plants" style="padding:0px 5px 0px 0px">
+                    <option value=""></option>
+                    <option value="8310">8310</option>
+                    <option value="8130">8130</option>
+                    <option value="8320">8320</option>
+                    <option value="8410">8410</option>
+                    <option value="8420">8420</option>
+                    <option value="8120">8120</option>
+                </select>
+            </div>
+            <div class="layui-input-inline" style="padding:0px 5px 0px 0px">
+                <select name="settlementclerk" id="settlementclerk" lay-filter="settlementclerk" style="padding:0px 5px 0px 0px">
+                    <option value=""></option>
+                    @*                     <option value="IT">IT</option>
+                <option value="总经理办公室">总经理办公室</option>
+                <option value="财务部">财务部</option>
+                <option value="绩效部">绩效部</option>
+                <option value="进出口部">进出口部</option>
+                <option value="业务一部">业务一部</option>
+                <option value="业务二部">业务二部</option>
+                <option value="业务部">业务部</option>
+                <option value="采购部">采购部</option>
+                <option value="维修部">维修部</option>
+                <option value="机修">机修</option>
+                <option value="工模部">工模部</option>
+                <option value="品管部">品管部</option>
+                <option value="人事部">人事部</option>
+                <option value="注塑E车间">注塑E车间</option>
+                <option value="注塑A车间">注塑A车间</option>
+                <option value="BCD车间">BCD车间</option>
+                <option value="喷丝组装">喷丝组装</option>
+                <option value="佳能组装车间">佳能组装车间</option>
+                <option value="生产事务组">生产事务组</option>
+                <option value="产品事业部">产品事业部</option>
+                <option value="生产工程">生产工程</option>
+                <option value="试模组">试模组</option>
+                <option value="保养组">保养组</option>
+                <option value="修模组">修模组</option>
+                <option value="PMC">PMC</option>
+                <option value="粉碎房">粉碎房</option>
+                <option value="物流部">物流部</option>*@
+                </select>
+                @*<input type="text" id="settlementclerk" name="settlementclerk" class="layui-input" placeholder="部门" lay-filter="settlementclerk" />*@
+            </div>
+            <div class="layui-input-inline">
+                <select id="ComputerType" name="ComputerType" lay-filter="switchTest">
+                    <option value="">资产类型</option>
+                    <option value="台式机">台式机</option>
+                    <option value="笔记本">笔记本</option>
+                    <option value="打印机">打印机</option>
+                </select>
+            </div>
+            <div class="layui-inline" id="searchKeyword" style="padding:0px 5px 0px 0px">
+                <input type="text" style="height:38px;min-height:38px" autocomplete="off" id="keyword" placeholder="资产编号" class="layui-textarea" />
+            </div>
+            <div class="layui-inline" id="searchIPAddress" style="padding:0px 5px 0px 0px">
+                <input type="text" style="height:38px;min-height:38px" autocomplete="off" id="IPAddress" placeholder="IP地址" class="layui-textarea" />
+            </div>
+            <div class="layui-inline" id="searchUser" style="padding:0px 5px 0px 0px">
+                <input type="text" style="height:38px;min-height:38px" autocomplete="off" id="User" placeholder="使用人" class="layui-textarea" />
+            </div>
+            <div class="layui-inline" id="searchComputerName" style="padding:0px 5px 0px 0px">
+                <input type="text" style="height:38px;min-height:38px" autocomplete="off" id="ComputerName" placeholder="资产名称" class="layui-textarea" />
+            </div>
+            <div class="layui-input-inline">
+                <select name="computerUseTime" id="computerUseTime" lay-filter="computerUseTime">
+                    <option value="">使用年限</option>
+                    <option value="5">5年以上</option>
+                    <option value="10">10年以上</option>
+                </select>
+            </div>
+        </div>
+        @*<div class="layui-inline" style="padding:20px 20px 20px 20px">*@
+        <div style="padding:0px 15px 0px 5px;text-align:right">
+            <label>电脑状态:</label>
+            <div class="layui-inline" id="searchKeywords" style="padding:0px 0px 0px 0px;">
+                <input type="checkbox" name="fxk" lay-filter="like" title="正常使用" value="正常使用" checked=checked>
+                <input type="checkbox" name="fxk" lay-filter="like" title="等待报废" value="等待报废">
+                <input type="checkbox" name="fxk" lay-filter="like" title="已经报废" value="已经报废">
+            </div>
+            <div class="layui-btn layui-btn-normal" id="search" style="background-color: #0074c8; border-radius:8%;">查询</div>
+            <div class="layui-btn layui-btn-normal" id="export" style="background-color: #0074c8;border-radius:8%; ">导出</div>
+            <div class="layui-btn layui-btn-normal" id="newlys" style="background-color: #0074c8;border-radius:8%; ">新增</div>
+            <div class="layui-btn layui-btn-normal" id="edits" style="background-color: #0074c8; border-radius:8%; ">编辑</div>
+            <div class="layui-btn layui-btn-normal" id="delete" style="background-color: #0074c8; border-radius:8%; ">删除</div>
+        </div>
+        <div id="qua" style="padding:5px">
+            <table id="tabledemo" lay-filter="test"></table>
+        </div>
+
+    </div>
+    <script>
+        layui.use(['element', 'table', 'laydate', 'form', 'util'], function () {
+            var form = layui.form;
+            var element = layui.element;
+            var table = layui.table;
+            var $ = layui.jquery
+            var layer = layui.layer;
+            var laydate = layui.laydate;
+            var dataMolds;
+            //加载用户所属工厂部门
+            $().ready(function () {
+                var plant11 = @ViewBag.plant;
+                $.ajax({
+                    type: "post",
+                    url: "/Home/SelectPlantStaff",
+                    data: { 'plant': plant11 },
+                    success: function (results) {
+                        //$("#settlementclerk option").remove();//移除当前select 的 option
+                        //$('#settlementclerk').append(new Option('', '-1')); //新增select 的option 选项
+                        $.each(results.data, function (index, item) {
+                            //option  第一个参数是页面显示的值，第二个参数是传递到后台的值
+                            $("#settlementclerk").append(new Option(item.department, item.department));//给下拉框赋值
+                        })
+                        form.render('select');//刷新表单select选择框渲染
+                    }
+                });
+            //页面加载时 加载当前用户的权限等级和工厂
+            $.getJSON("/Home/getUserJson", function (result) {
+                if (result.department == "IT") {
+                    form.val('UserInfoForm', {
+                        "role": result.role,
+                        "plants": result.plant,
+                        "username": result.UserID,
+                    })
+                } else {
+                    obj = {
+                        "role": result.role,
+                        "plants": result.plant,
+                        "username": result.UserID,
+                        "settlementclerk": result.department
+                    }
+                    form.val('UserInfoForm',JSON.parse(JSON.stringify(obj)))
+                }
+                //console.log(result.role);
+                if (result.role == "normal") {
+                    
+                    $("#plants").attr("disabled", "disabled");
+                    $("#settlementclerk").attr("disabled", "disabled");
+                    $("#newlys").hide();
+                    $("#delete").hide();
+                    layui.jquery("#link1").hide();
+                  form.render('select');
+                }
+                if (result.role == "Admin") {
+                    $("#plants").attr("disabled", "disabled");
+                    $("#delete").hide();
+                    form.render('select');
+                }
+                var plant0 = $('#plants').val();
+                var Departments = $('#settlementclerk').val();
+                var statusArray = $('input[name="fxk"]');
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/SelectComputerStatus",
+                    data: { 'plant': plant0 },
+                    success: function (result) {
+                        document.getElementById("ComputerStatus1").innerHTML = result.ComputerStatus1;
+                        document.getElementById("ComputerStatus2").innerHTML = result.ComputerStatus2;
+                        document.getElementById("ComputerStatus3").innerHTML = result.ComputerStatus3;
+                    }
+                })
+                //部门动态响应
+                form.on('select(plants)', function () {
+                    var plant12 = $('#plants').val();
+                    $.ajax({
+                        type: "post",
+                        url: "/Home/SelectPlantStaff",
+                        data: { 'plant': plant12 },
+                        success: function (results) {
+                            $("#settlementclerk option").remove();//移除当前select 的 option
+                            $('#settlementclerk').append(new Option("","")); //新增select 的option 选项
+                            $.each(results.data, function (index, item) {
+                                //option  第一个参数是页面显示的值，第二个参数是传递到后台的值
+                                $("#settlementclerk").append(new Option(item.department, item.department));//给下拉框赋值
+                            })
+                            form.render('select');//刷新表单select选择框渲染
+                        }
+                    });
+                });
+                //console.log(statusArray[0].value);
+                //实例
+                table.render({
+                    elem: '#tabledemo',
+@*                    , toolbar: '#toolbarDemo'
+                    , defaultToolbar: ['filter', 'exports', 'print'],*@
+                    height: 'full-60',
+                    url: "/Home/getFixedData", //数据接口
+                    where: { plantss: plant0, Departmentss: Departments, ComputerStatusss: statusArray[0].value},
+                    autoSort: false,
+                    cols: [[ //标题栏
+                        @*{ type: 'numbers', title: '序号', width: 80 }*@
+                        { type: 'checkbox', fixed: 'left' }
+                        , { field: 'ID', title: 'ID', width: 60, align: 'center', sort: true }
+                        , { field: 'plant', title: '工厂', width: 75, align: 'center', sort: true }
+                        , { field: 'Department', title: '部门', width: 115, align: 'center', sort: true } //rowspan即纵向跨越的单元格数
+                        , { field: 'AssetUser', title: '使用人', width: 100, align: 'center', sort: true }
+                        , { field: 'AssetNumber', title: '资产编号', width: 130, align: 'center', sort: true }
+                        , { field: 'ComputerName', title: '资产名称', width: 150, align: 'center', sort: true }//colspan即横跨的单元格数，这种情况下不用设置field和width
+                        , { field: 'ComputerType', title: '资产类型', width: 120, align: 'center', sort: true }
+                        , { field: 'ComputerModel', title: '资产型号', width: 175, align: 'center', sort: true }
+                        , { field: 'SerialNumber', title: '序列号', width: 130, align: 'center', sort: true }
+                        , { field: 'IPAddress', title: 'IP地址', width: 130, align: 'center', sort: true }
+                        , { field: 'MACAddress', title: 'MAC地址', width: 100, align: 'center', sort: true }
+                        , { field: 'BuyTime', title: '购买时间', width: 130, align: 'center', sort: true, templet: function (value) { return toDate(value.BuyTime) }}
+                        , { field: 'UseTime', title: '使用时间(年)', width: 120, align: 'center', sort: true}
+                        , { field: 'Place', title: '使用地点', width: 115, align: 'center', sort: true }
+                        , { field: 'OS', title: '操作系统', width: 105, align: 'center', sort: true }
+                        , { field: 'USBPort', title: 'USBPort开放状态', width: 100, align: 'center', sort: true }
+                        , { field: 'Internet', title: '是否联网', width: 120, align: 'center', sort: true }
+                        , { field: 'ComputerStatus', title: '资产状态', width: 120, align: 'center', sort: true }
+                        , { field: 'ChangeRecord01', title: '资产变更记录01', width: 120, align: 'center', sort: true }
+                        , { field: 'ChangeRecord02', title: '资产变更记录02', width: 120, align: 'center', sort: true }
+                        , { field: 'ChangeRecord03', title: '资产变更记录03', width: 120, align: 'center', sort: true }
+                        , { field: 'Remark01', title: '备注01', width: 120, align: 'center', sort: true }
+                        , { field: 'Remark02', title: '备注02', width: 120, align: 'center', sort: true }
+                        , { field: 'createPeople', title: '创建人', width: 120, align: 'center', sort: true }
+                        , { field: 'createTime', title: '创建时间', width: 120, align: 'center', sort: true, templet: function (value) { return toDate(value.createTime) }}
+                        , { field: 'modifyPeople', title: '修改人', minWidth: 120, align: 'center', sort: true }
+                        , { field: 'modifyTime', title: '修改时间', minidth: 120, align: 'center', sort: true, templet: function (value) { return toDate(value.modifyTime) } }
+                        @*, { field: 'MarkerColor', title: '标记', width: 100,lign: 'center', sort: true }*@
+                    ]],
+                    page: true, //开启分页
+                    limits: [10, 50, 100, 1000],
+                    limit: 10,
+                    parseData: function (res) {
+                        console.log(res);
+                        var result;
+                        dataMolds = res.data;//将表格中的数据赋值给全局变量
+                        //console.log(res.data);
+                        //if (this.page.curr) {
+                        //    result = res.data.slice(this.limit*(this.page.curr-1),this.limit*this.page.curr);
+                        //}
+                        //else {
+                        //    result = res.data.slice(0, this.limit);
+                        //}
+                        //return {
+                        //    "code": res.code, //解析接口状态
+                        //    "msg": res.msg, //解析提示文本
+                        //    "count": res.count, //解析数据长度
+                        //    "data": result //解析数据列表
+                        //};
+                    },
+                    done: function (res, curr, count) {
+                        //console.log(res);
+                        res.data.forEach(function (item, index) {
+                            //使用年份
+                            if (Number(item.UseTime) >=10) {
+                                $('#qua').find('tr[data-index="' + index + '"]').find('td[data-field="UseTime"]').css({ 'background-color': 'red', 'color': 'white' });
+                            }
+                            if (Number(item.UseTime) >= 5 && Number(item.UseTime) < 10) {
+                                $('#qua').find('tr[data-index="' + index + '"]').find('td[data-field="UseTime"]').css({ 'background-color': 'yellow', 'color': 'black' });
+                            }
+                        });
+                        //状态
+                        res.data.forEach(function (item, index) {
+                            if (String(item.ComputerStatus) == "等待报废") {
+                                $('#qua').find('tr[data-index="' + index + '"]').find('td[data-field="ComputerStatus"]').css({ 'background-color': 'yellow', 'color': 'black' });
+                            }
+                            else if (String(item.ComputerStatus) == "已经报废") {
+                                $('#qua').find('tr[data-index="' + index + '"]').find('td[data-field="ComputerStatus"]').css({ 'background-color': 'red', 'color': 'white' });
+                            }
+                        });
+                        //标记  (橙色) （没有在使用也没有报废）  
+                        res.data.forEach(function (item, index) {
+                            if (String(item.MarkerColor) == "orange") {
+                                $('#qua').find('tr[data-index="' + index + '"]').css({
+                                    'background-color': 'orange',
+                                    'color': 'black'
+                                });
+                            }
+                        });
+                    }
+                });
+            })
+            });
+            //排序后回调
+            table.on('sort(test)', function (res) {
+                var Departments = $('#settlementclerk').val();
+                var AssetNumbers = $('#keyword').val();
+                var ComputerType = $('#ComputerType').val();
+                var plant0 = $('#plants').val();
+                var AssetUsers = $('#User').val();
+                var ComputerNames = $('#ComputerName').val();
+                var statusArray = $('input[name="fxk"]');
+                var IPAddress0 = $('#IPAddress').val();
+                var computerUseTime = $('#computerUseTime').val();
+                //获取input[name="labelType"]的值
+                var labels = [];
+                for (k in statusArray) {
+                    if (statusArray[k].checked) {
+                        //获取所有选中的复选框，并将其值放入数组中
+                        labels.push(statusArray[k].value);
+                    }
+                }
+                //console.log(labels);
+                var ComputerStatus = labels.join(",");
+                table.reload('tabledemo', {
+                    initSort: res,
+                    where: {
+                        field: res.field,
+                        order: res.type,
+
+                        Departmentss: Departments,
+                        AssetNumberss: AssetNumbers,
+                        ComputerTypes: ComputerType,
+                        AssetUserss: AssetUsers,
+                        ComputerNamess: ComputerNames,
+                        ComputerStatusss: ComputerStatus,
+                        plantss: plant0,
+                        IPAddresss: IPAddress0,
+                        computerUseTimes: computerUseTime
+                   },
+                    page: {curr:1}
+                })
+            });
+
+
+            //查询
+            var field = null;
+            var type = null;
+            $('#search').on('click', function (data) {
+                var Departments = $('#settlementclerk').val();
+                var AssetNumbers = $('#keyword').val();
+                var ComputerType = $('#ComputerType').val();
+                var plant0 = $('#plants').val();
+                var AssetUsers = $('#User').val();
+                var ComputerNames = $('#ComputerName').val();
+                var IPAddress0 = $('#IPAddress').val();
+                var computerUseTime = $('#computerUseTime').val();
+                var statusArray = $('input[name="fxk"]');
+                //获取input[name="labelType"]的值
+                var labels = [];
+                for (k in statusArray) {
+                    if (statusArray[k].checked) {
+                        //获取所有选中的复选框，并将其值放入数组中
+                        labels.push(statusArray[k].value);
+                    }
+                }
+                //console.log(labels);
+                var ComputerStatus = labels.join(",");
+                // console.log(ComputerStatus);
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/SelectComputerStatus",
+                    data: { 'plant': plant0 },
+                    success: function (result) {
+                        document.getElementById("ComputerStatus1").innerHTML = result.ComputerStatus1;
+                        document.getElementById("ComputerStatus2").innerHTML = result.ComputerStatus2;
+                        document.getElementById("ComputerStatus3").innerHTML = result.ComputerStatus3;
+                    }
+                })
+                    table.reload('tabledemo', {
+                    where: {
+                        field: field,
+                        order: type,
+
+                        Departmentss: Departments,
+                        AssetNumberss: AssetNumbers,
+                        ComputerTypes: ComputerType,
+                        AssetUserss: AssetUsers,
+                        ComputerNamess: ComputerNames,
+                        ComputerStatusss: ComputerStatus,
+                        plantss: plant0,
+                        IPAddresss: IPAddress0,
+                        computerUseTimes: computerUseTime
+                    },
+                    page: {
+                        curr: 1
+                    }
+                })
+            })
+            //回车键调用查询
+            $(document).keydown(function (e) {
+                if (e.keyCode === 13) {
+                    $('#search').click();
+                }
+            });
+             //新增
+            $('#newlys').on('click', function (even) {
+                layer.open({
+                    type: 2,
+                    content: '@Url.Action("FixedAssetsMainTain")' ,
+                    title: "固定资产新增",
+                    area: ['790px', '660px'],
+                    end: function () { //关闭弹框时的回调函数
+                        @*location.reload();//刷新界面*@
+                        $('#search').click();
+                    }
+                });
+            })
+            //编辑
+            $('#edits').on('click', function () {
+                var checkStatus = table.checkStatus("tabledemo").data;//获取tabledemo的数据
+                if (checkStatus.length !== 1) {
+                    return layer.msg('请选择一行');
+                }
+                var selectDatas = table.checkStatus("tabledemo").data[0];
+                if (selectDatas) {
+                    layer.open({
+                    type: 2,
+                    content: '@Url.Action("FixedAssetsMainTain")?ID=' + selectDatas.ID,
+                    title: "固定资产编辑",
+                    area:['790px','660px'],
+                    end: function () { //关闭弹框时的回调函数
+                        //window.location.replace(document.referrer);
+                        @*location.reload();//刷新界面*@
+                        $('#search').click();
+                        }
+                    });
+                }
+                else {
+                    layer.msg("选择要修改的行！", {icon:3})
+                }
+            })
+            //删除
+            $('#delete').on('click', function () {
+                var checkStatus = table.checkStatus("tabledemo").data;//获取tabledemo的数据
+                if (checkStatus.length !== 1) {
+                    return layer.msg('请选择一行');
+                }
+                var selectData = table.checkStatus("tabledemo").data[0];//获取tabledemo的数据
+                //console.log(selectData);
+                if (selectData) {
+                    layer.confirm("确定删除：" + selectData.ID + " ?", {
+                        btn: ['删除', '取消'],
+                        btn1: function (index, layero) {
+                            $.ajax({
+                                type: "POST",
+                                url: "/Home/deleteAssetStandardData",
+                                data: { 'id': selectData.id },
+                                data: { 'assetNumber': selectData.AssetNumber, 'plant': selectData.plant, 'ID': selectData.ID },
+                                success: function (result) {
+                                    if (result.Success) {
+                                        layer.msg(result.Message, { icon: 1 })
+                                        layer.close(index);
+                                        //$('#search').click();
+                                        setTimeout(function () {
+
+                                            location.reload();
+
+                                        }, 1 * 1000);//延迟1000毫秒
+
+                                    }
+                                    else {
+                                        layer.msg(result.Message, { icon: 2 });
+                                    }
+
+                                }
+                            })
+                            //console.log(data);
+                        },
+                    });
+                }
+                else {
+                    layer.msg("选择要删除的行！", { icon: 3 })
+                }
+            });
+            //导出
+            var shouLoad = function () {
+                return layer.msg('正在导出，请稍候...', { icon: 16, shade: [0.5, '#f5f5f5'], scrollbar: false, offset: 'auto', time: 10000000 })
+            }
+            var closeLoad = function (index) {
+                layer.close(index);
+            }
+            $('#export').on('click', function () {
+                var Departments = $('#settlementclerk').val();
+                var AssetNumbers = $('#keyword').val();
+                var ComputerType = $('#ComputerType').val();
+                var plant0 = $('#plants').val();
+                var AssetUsers = $('#User').val();
+                var ComputerNames = $('#ComputerName').val();
+                var IPAddress0 = $('#IPAddress').val();
+                var computerUseTime = $('#computerUseTime').val();
+                var statusArray = $('input[name="fxk"]');
+                //获取input[name="labelType"]的值
+                var labels = [];
+                for (k in statusArray) {
+                    if (statusArray[k].checked) {
+                        //获取所有选中的复选框，并将其值放入数组中
+                        labels.push(statusArray[k].value);
+                    }
+                }
+                //console.log(labels);
+                var ComputerStatus = labels.join(",");
+               // console.log(ComputerStatus);
+
+                $.ajax({
+                    type: "post",
+                    url: "/Home/getFixedDataExt",
+                    data: { 'Departmentss': Departments, 'AssetNumberss': AssetNumbers, 'ComputerTypes': ComputerType, 'AssetUserss': AssetUsers, 'ComputerNamess': ComputerNames, 'ComputerStatusss': ComputerStatus, 'plantss': plant0, IPAddresss: IPAddress0, computerUseTimes: computerUseTime,'order': type,'field':field},
+                    beforeSend: function () { i = shouLoad() },
+                    error: function () { closeLoad(i); layer.msg('请求失败！', { icon: 2 }); },
+                    success: function (result) {
+                        //layer.load(3);
+                        //console.log(result.data);
+                        if (result.data != null) {
+                            table.exportFile('tabledemo', result.data, 'csv')
+                        }
+                        closeLoad(i);
+                    },
+                    //complete: function () { layer.closeAll("loading");}
+                });
+                ////关闭loading动画
+                //layer.closeAll("loading");
+            });
+
+        })
+    </script>
+    <script>
+        var toDate = function (val) {
+            if (val == null) {
+                return "";
+            }
+            else {
+                var timestamp = val
+                var date = new Date(parseInt(timestamp.replace("/Date(", "").replace(")/", ""), 10));
+                Y = date.getFullYear() + '-';
+                M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate());// + ' ';
+                //h = (date.getHours() < 10 ? '0' + (date.getHours()) : date.getHours()) + ':';
+                //m = (date.getMinutes() < 10 ? '0' + (date.getMinutes()) : date.getMinutes()) + ':';
+                //s = (date.getSeconds() < 10 ? '0' + (date.getSeconds()) : date.getSeconds());
+                //var NewDtime = Y + M + D + h + m + s;
+                var NewDtime = Y + M + D;
+                return NewDtime
+            }
+        }
+         layui.jquery().ready(
+            function checkAdmin() {//检查管理员
+                var isAdmin = '@ViewBag.IsAdmin';
+                //console.log(isAdmin);
+                if (isAdmin == "UserNormal") {
+                    layui.jquery('#link1').hide();
+                 }
+             })
+    </script>
+</body>
+</html>

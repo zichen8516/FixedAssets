@@ -1,0 +1,243 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>UserInfo</title>
+    <link href="~/Scripts/src/css/layui.css" rel="stylesheet" />
+    <script src="~/Scripts/src/layui.js"></script>
+</head>
+<body>
+    <div>
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>用户信息</legend>
+        </fieldset>
+        <div class="layui-form" lay-filter="UserInfoForm">
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width:140px">用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户：</label>
+                <div class="layui-input-block" style="width:500px; margin-left:180px">
+                    <input type="text" id="UserID" name="userName" lay-verify="required|username" lay-reqtext="用户信息不能为空！" placeholder="请输入用户名" autocomplete="off" class="layui-input" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width:140px">工&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;厂：</label>
+                <div class="layui-input-block" style="width:500px;margin-left:180px">
+                    <select name="plant" id="plant" lay-filter="plant" lay-verify="required" lay-reqtext="用户工厂不能为空！" placeholder="请输入工厂" autocomplete="off">
+                        <option value=""></option>
+                        <option value="8310">8310</option>
+                        <option value="8130">8130</option>
+                        <option value="8320">8320</option>
+                        <option value="8410">8410</option>
+                        <option value="8420">8420</option>
+                        <option value="8120">8120</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width:140px">部&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;门：</label>
+                <div class="layui-input-block" style="width: 500px; margin-left: 180px">
+                    <select name="Department" id="Department" lay-filter="Department" lay-verify="required" lay-reqtext="部门不能为空！">
+                        <option value=""></option>
+@*                        <option value="IT">IT</option>
+                        <option value="总经理办公室">总经理办公室</option>
+                        <option value="财务部">财务部</option>
+                        <option value="绩效部">绩效部</option>
+                        <option value="进出口部">进出口部</option>
+                        <option value="业务一部">业务一部</option>
+                        <option value="业务二部">业务二部</option>
+                        <option value="业务部">业务部</option>
+                        <option value="采购部">采购部</option>
+                        <option value="维修部">维修部</option>
+                        <option value="机修">机修</option>
+                        <option value="工模部">工模部</option>
+                        <option value="品管部">品管部</option>
+                        <option value="人事部">人事部</option>
+                        <option value="注塑E车间">注塑E车间</option>
+                        <option value="注塑A车间">注塑A车间</option>
+                        <option value="BCD车间">BCD车间</option>
+                        <option value="喷丝组装">喷丝组装</option>
+                        <option value="佳能组装车间">佳能组装车间</option>
+                        <option value="生产事务组">生产事务组</option>
+                        <option value="产品事业部">产品事业部</option>
+                        <option value="生产工程">生产工程</option>
+                        <option value="试模组">试模组</option>
+                        <option value="保养组">保养组</option>
+                        <option value="修模组">修模组</option>
+                        <option value="PMC">PMC</option>
+                        <option value="粉碎房">粉碎房</option>
+                        <option value="物流部">物流部</option>*@
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width:140px">新&nbsp;密&nbsp;码：</label>
+                <div class="layui-input-block" style="width: 500px; margin-left: 180px">
+                    <input type="password" name="passWord1" lay-verify="required" lay-reqtext="密码不能为空！" placeholder="请输入新密码" autocomplete="off" class="layui-input" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width:140px">新&nbsp;密&nbsp;码：</label>
+                <div class="layui-input-block" style="width: 500px; margin-left: 180px">
+                    <input type="password" name="passWord2" lay-verify="required" lay-reqtext="密码不能为空！" placeholder="再次输入新密码" autocomplete="off" class="layui-input" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width:140px">权&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;限：</label>
+                <div class="layui-input-block" style="width: 500px; margin-left: 180px">
+                    <select id="roles" name="role" lay-filter="role">
+                        <option value="Administrator">超级管理员</option>
+                        <option value="Admin">管理员</option>
+                        @*<option value="general">输入用户</option>*@
+                        <option value="normal" selected="">普通用户</option>
+                    </select>
+                </div>
+            </div>
+            <hr style="margin:50px 0px 20px 0px;color:black" />
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="text-align:left;margin-left:480px">
+                    <button type="submit" class="layui-btn " lay-submit="" lay-filter="UserInfoSubmit" style="background-color: #0074c8;"><i class="layui-icon layui-icon-ok-circle"></i>  保存</button>
+                    <button type="submit" id="delete" class="layui-btn " lay-submit="" lay-filter="UserInfoDelete" style="background-color: #0074c8;"><i class="layui-icon layui-icon-reduce-circle"></i>  删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        layui.use(['element', 'layedit', 'form', 'layer'], function () {
+            var element = layui.element;
+            var $ = layui.jquery;
+            var form = layui.form;
+            var layer = layui.layer;
+
+            //为Ajax设置超时退出
+            $.ajaxSetup({
+                statusCode: {
+                    401: function () {
+                        window.location.href = "/Login/Login"
+                    }
+                }
+            });
+            //加载用户所属工厂部门
+            $().ready(function () {
+                var plant11 = @ViewBag.plant;
+                $.ajax({
+                    type: "post",
+                    url: "/Home/SelectPlantStaff",
+                    data: { 'plant': plant11 },
+                    success: function (results) {
+                        //$("#settlementclerk option").remove();//移除当前select 的 option
+                        //$('#settlementclerk').append(new Option('', '-1')); //新增select 的option 选项
+                        $.each(results.data, function (index, item) {
+                            //option  第一个参数是页面显示的值，第二个参数是传递到后台的值
+                            $("#Department").append(new Option(item.department, item.department));//给下拉框赋值
+                        })
+                        form.render('select');//刷新表单select选择框渲染
+                    }
+                });
+                //页面加载时 加载当前用户的用户名和权限等级
+                $.getJSON("/Home/getUserJson", function (result) {
+
+                    form.val('UserInfoForm', {
+                        "userName": result.UserID,
+                        "role": result.role,
+                        "plant": result.plant,
+                        "Department": result.department
+                    })
+                if (result.role != "Administrator") {
+                    //$("#UserID").attr("disabled", "disabled");
+                    var selectElement = document.getElementById("roles");
+                    selectElement.remove(0);
+                    $("#plant").attr("disabled", "disabled");
+                    $("#delete").hide();
+                    form.render('select');
+                }
+                })
+            });
+            //部门动态响应
+            form.on('select(plant)', function () {
+                var plant12 = $('#plant').val();
+                $.ajax({
+                    type: "post",
+                    url: "/Home/SelectPlantStaff",
+                    data: { 'plant': plant12 },
+                    success: function (results) {
+                        $("#Department option").remove();//移除当前select 的 option
+                        $('#Department').append(new Option("", "")); //新增select 的option 选项
+                        $.each(results.data, function (index, item) {
+                            //option  第一个参数是页面显示的值，第二个参数是传递到后台的值
+                            $("#Department").append(new Option(item.department, item.department));//给下拉框赋值
+                        })
+                        form.render('select');//刷新表单select选择框渲染
+                    }
+                });
+            });
+            //保存
+            form.on('submit(UserInfoSubmit)', function (obj) {
+                var data = obj.field;
+                if (data.passWord1 == data.passWord2) {
+                    $.ajax({
+                        type: "post",
+                        url: '/Home/saveUserInfo',
+                        data: data,
+                        error: function () { layer.msg('请求失败！', { icon: 2 }) },
+                        success: function (result) {
+                            if (result.res  == 99) {
+                                layer.msg('不能修改其它管理员信息！', { icon: 2 })
+                            }
+                            else if (result.res == 1) {
+                                layer.msg('保存成功', { icon: 1 })
+                            }
+                            else {
+                                layer.msg('保存失败', { icon: 2 })
+                            }
+                        }
+                    })
+                }
+                else {
+                    layer.msg('两次输入密码不一致！', { icon: 2 })
+                }
+            })
+
+            //删除
+            form.on('submit(UserInfoDelete)', function (obj) {
+                var UserID = $("#UserID").val();
+                $.ajax({
+                    type: "post",
+                    url: '/Home/deleteUserInfo',
+                    data: { 'UserID': UserID },
+                    error: function () { layer.msg('请求失败！', { icon: 2 }) },
+                    success: function (result) {
+                        if (result.Success) {
+                            layer.msg('删除成功', { icon: 1 })
+                        }
+                        else {
+                            layer.msg('删除失败', { icon: 2 })
+                        }
+                    }
+                });
+            });
+
+            //用户名输入验证
+            form.verify({
+                username: function (value, item) { //value：表单的值、item：表单的DOM对象
+                    if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+                        return '用户名不能有特殊字符';
+                    }
+                    if (/(^\_)|(\__)|(\_+$)/.test(value)) {
+                        return '用户名首尾不能出现下划线\'_\'';
+                    }
+                    if (/^\d+\d+\d$/.test(value)) {
+                        return '用户名不能全为数字';
+                    }
+                }
+
+            })
+        })
+
+    </script>
+</body>
+</html>
